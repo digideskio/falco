@@ -4,7 +4,7 @@ MAINTAINER Sysdig <support@sysdig.com>
 
 ENV FALCO_REPOSITORY dev
 
-LABEL RUN="docker run -i -t -v /var/run/docker.sock:/host/var/run/docker.sock -v /dev:/host/dev -v /proc:/host/proc:ro -v /boot:/host/boot:ro -v /lib/modules:/host/lib/modules:ro -v /usr:/host/usr:ro --name NAME IMAGE"
+LABEL RUN="docker run -i -t --privileged -v /var/run/docker.sock:/host/var/run/docker.sock -v /dev:/host/dev -v /proc:/host/proc:ro -v /boot:/host/boot:ro -v /lib/modules:/host/lib/modules:ro -v /usr:/host/usr:ro --name NAME IMAGE"
 
 ENV SYSDIG_HOST_ROOT /host
 
@@ -45,6 +45,4 @@ RUN ln -s $SYSDIG_HOST_ROOT/lib/modules /lib/modules
 
 COPY ./docker-entrypoint.sh /
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-CMD ["/usr/bin/falco"]
+ENTRYPOINT ["/docker-entrypoint.sh", "/usr/bin/falco"]

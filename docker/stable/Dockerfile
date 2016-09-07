@@ -18,8 +18,8 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
 	bash-completion \
 	curl \
-	ca-certificates \
 	gnupg2 \
+	ca-certificates \
 	gcc \
 	gcc-4.9 && rm -rf /var/lib/apt/lists/*
 
@@ -45,6 +45,4 @@ RUN ln -s $SYSDIG_HOST_ROOT/lib/modules /lib/modules
 
 COPY ./docker-entrypoint.sh /
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-CMD ["/usr/bin/falco"]
+ENTRYPOINT ["/docker-entrypoint.sh", "/usr/bin/falco"]

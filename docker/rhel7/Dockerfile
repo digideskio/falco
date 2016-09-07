@@ -23,7 +23,6 @@ RUN yum -y install gcc dkms falco && \
 	rm -fr /usr/src/kernels && \
 	yum clean all
 
-#Symlink to the modules directory
 RUN ln -s $SYSDIG_HOST_ROOT/lib/modules /lib/modules
 
 COPY ./docker-entrypoint.sh /
